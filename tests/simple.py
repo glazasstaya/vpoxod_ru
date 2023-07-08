@@ -6,87 +6,89 @@
 6. Календарь походов - фильтрация по цене - test_search_form
 7. форма поиска на главной - test_search_form_main
 '''
-from datetime import datetime, timedelta
+import time
 
-from selene import browser, have, be, command, query
+from model.pages.main_page import MainPage
+from model.pages.search_page import SearchPage
+from model.pages.news_page import NewsPage
+from model.pages.route_page import RoutPage
+from model.pages.allroutes import AllroutesPage
+from model.utils.helper import scroll_to_element
+from model.data.data_objects import MainSearchForm, AllroutsSearchForm
 
-import os.path
-import requests
+main_page = MainPage()
+search_page = SearchPage()
+news_page = NewsPage()
+route_page = RoutPage()
+allroutes_page = AllroutesPage()
+
 
 def test_search_header_positive():
-    browser.open('https://www.vpoxod.ru/')
-    browser.element('#header-sitesearch-q').click().type('Хибины').press_enter()
-
-    browser.element('.search-item[data-key="0"]').should(have.text('Хибины'))
+    main_page.open()
+    main_page.header_search('Хибины')
+    search_page.search_result_success('Хибины')
 
 
 def test_search_header_negative():
-    browser.open('https://www.vpoxod.ru/')
-    browser.element('#header-sitesearch-q').click().type('Хиpины').press_enter()
+    main_page.open()
+    main_page.header_search('Хиhины')
+    search_page.search_result_failure('Ничего не найдено по заданным критериям поиска.')
 
-    browser.element('#site-search').should(have.text('Ничего не найдено по заданным критериям поиска.'))
 
-def test_menu_simple_desctop(): #для параметризации
-    browser.open('https://www.vpoxod.ru/')
-    browser.element('//nav/ul/li/a[text()="Новости"]').click()
-    browser.element('.main_top').should(have.text('НОВОСТИ'))
+def test_menu_simple_desctop():  # для параметризации
+    main_page.open()
+    main_page.menu_desktop_click('Новости')
+    news_page.title('НОВОСТИ')
 
-def test_menu_simple_mobile(): #для параметризации
-    browser.open('https://www.vpoxod.ru/')
-    #клик в меню
-    browser.element('//nav/div/divul/li/a[text()="Новости"]').click()
-    browser.element('h1').should(have.text('НОВОСТИ'))
+
+def test_menu_simple_mobile():  # для параметризации
+    main_page.open()
+    main_page.mobile_burger_button_click()
+    main_page.menu_mobile_click('Новости')
+    news_page.title('НОВОСТИ')
 
 
 def test_search_form_main():
-    date1 = (datetime.now()).strftime("%d.%m.%Y")
-    date2 = (datetime.now() + timedelta (days=60)).strftime("%d.%m.%Y")
-    browser.open('https://www.vpoxod.ru/')
-    browser.element('.main_slider_pager').perform(command.js.scroll_into_view)
-    browser.element('#hikesearch-date-from').set_value(date1)
-    browser.element('#hikesearch-date-to').set_value(date2)
-    browser.all('.main_page_filter_box_field').element_by(have.text('РЕГИОН')).element('..').element(
-        '.select2-search__field').type('Кавказ').press_enter()
-    browser.all('.main_page_filter_box_field').element_by(have.text('ТИПЫ ПУТЕШЕСТВИЙ')).element('..').element(
-        '.select2-search__field').type('Горные').press_enter()
-    browser.all('.main_page_filter_box_field').element_by(have.text('СЛОЖНОСТЬ')).element('..').element(
-        '.select2-search__field').type('Средняя').press_enter()
-    browser.element('#main-page-hike-search-form button').click()
-    browser.element('#text1').perform(command.js.scroll_into_view)
-    browser.element('.route_search_result_content').should(be.visible)
+    search_data = MainSearchForm(first_date_delta=1,
+                                 second_date_delta=100,
+                                 regions=['Кавказ', 'Алтай'],
+                                 trip_types=['Горный'],
+                                 difficult=['Средняя'])
+
+    main_page.open()
+    scroll_to_element('.main_slider_pager')
+
+    main_page.search_form_date_fill(search_data.first_date_delta, search_data.second_date_delta)
+    main_page.search_form_region_fill(search_data.regions)
+    main_page.search_form_trip_type_fill(search_data.trip_types)
+    main_page.search_form_difficult_fill(search_data.difficult)
+    main_page.search_form_submit()
+
+    scroll_to_element('#text1')
+    route_page.search_result_check()
+
 
 def test_search_form():
-    min_price = '29000'
-    max_price = '45000'
-    browser.open('https://www.vpoxod.ru/allroutes')
-    browser.element('#max-cost').type('0').press_enter()
-    browser.element('.route_search_result_content .pt-md').should(have.text('ничего не нашлось'))
+    search_data = AllroutsSearchForm(min_price=29000,
+                                     max_price=45000)
 
-    browser.element('#min-cost').type(min_price).press_enter()
-    browser.element('#max-cost').set_value(max_price).press_enter()
-    browser.element('.route_search_counters').should(have.text('Найден'))
-    price = browser.all('.table_price_right')[0].get(query.text)
-    price = ''.join(c for c in price if c.isdigit())
-    assert int(price) >= int(min_price)
-    assert int(price) <= int(max_price)
+    allroutes_page.open()
+    #очищаем результаты поиска
+    allroutes_page.max_cost_fill(0)
+    time.sleep(2)
 
+    allroutes_page.min_cost_fill(search_data.min_price)
+    allroutes_page.max_cost_fill(search_data.max_price)
 
-
+    allroutes_page.search_result_success('Найден')
+    assert allroutes_page.price() >= search_data.min_price
+    assert allroutes_page.price() <= search_data.max_price
 
 
 def test_downloaded_file_size():
-    current_dir= os.path.dirname(os.path.abspath(__file__))
-    download_dir = os.path.dirname(os.path.join(current_dir, 'resources'))
-    os.chdir(download_dir)
-    url = 'https://www.vpoxod.ru/img/logo/logo-20-years-orange.svg'
+    main_page.logo_download()
 
-    r = requests.get(url)
-    with open('logo-20-years-orange.svg', 'wb') as file:
-        file.write(r.content)
-    size = os.path.getsize('logo-20-years-orange.svg')
+    assert main_page.logo_file_size_check() == 10739
 
-    assert size == 10739
-
-    download_file = os.path.join(download_dir, 'logo-20-years-orange.svg')
-    os.remove(download_file)
-
+    #TODO в фикстуру
+    #os.remove(download_file)
