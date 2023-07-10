@@ -2,9 +2,6 @@ import time
 import pytest
 
 from model.pages.allroutes_page import AllroutesPage
-from model.data.data_objects import AllroutsSearchForm
-
-
 allroutes_page = AllroutesPage()
 
 
@@ -15,13 +12,14 @@ def result_clear():
     time.sleep(2)
 
 
-def test_price_search_success(result_clear):
-    search_data = AllroutsSearchForm(min_price=29000,
-                                     max_price=45000)
+@pytest.mark.parametrize('price1, price2', [(29000, 45000), (0, 3000), (45000, 90000)])
+def test_price_search_success(browser_setup, result_clear, price1, price2):
+    min_price = price1
+    max_price = price2
 
-    allroutes_page.min_cost_fill(search_data.min_price)
-    allroutes_page.max_cost_fill(search_data.max_price)
+    allroutes_page.min_cost_fill(min_price)
+    allroutes_page.max_cost_fill(max_price)
 
     allroutes_page.search_result_success('Найден')
-    assert allroutes_page.price() >= search_data.min_price
-    assert allroutes_page.price() <= search_data.max_price
+    assert allroutes_page.price() >= min_price
+    assert allroutes_page.price() <= max_price

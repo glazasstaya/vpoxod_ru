@@ -2,14 +2,12 @@ import os.path
 import requests
 from selene import browser, have
 from model.utils.helper import now_delta, dir_checout
-from definition import ROOT_DIR
 
 
 class MainPage:
 
     def open(self):
         browser.open('')
-
 
     def header_search(self, text):
         browser.element('#header-sitesearch-q').click().type(text).press_enter()
@@ -18,10 +16,14 @@ class MainPage:
         browser.element('.sticky-menu').click()
 
     def menu_desktop_click(self, text):
-        browser.element(f'//nav/ul/li/a[text()="{text}"]').click()
+        browser.element(f'//*[text()="{text}"]').click()
 
-    def menu_mobile_click(self, text):
-        browser.element(f'//nav/div/divul/li/a[text()="{text}"]').click()
+    def menu_desktop_hover(self, text):
+        browser.element(f'//*[text()="{text}"]').hover()
+
+    def menu_result_title(self, text):
+        browser.element('.main_top').should(have.text(text))
+
 
     def search_form_date_fill(self, min_delta, max_delta):
         browser.element('#hikesearch-date-from').set_value(now_delta(min_delta))

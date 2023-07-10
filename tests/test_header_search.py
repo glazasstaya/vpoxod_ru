@@ -5,7 +5,7 @@ main_page = MainPage()
 search_page = SearchPage()
 
 
-def test_header_search_positive():
+def test_header_search_positive(browser_setup):
     main_page.open()
 
     main_page.header_search('Хибины')
@@ -13,7 +13,7 @@ def test_header_search_positive():
     search_page.search_result_success('Хибины')
 
 
-def test_header_search_negative():
+def test_header_search_negative(browser_setup):
     main_page.open()
 
     main_page.header_search('Хиhины')

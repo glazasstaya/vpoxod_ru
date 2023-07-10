@@ -1,10 +1,8 @@
 import pytest
-import os
 from selene.support.shared import browser
-from model.utils.helper import dir_checout
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope='function')
 def browser_setup():
     browser.config.base_url = 'https://www.vpoxod.ru'
     browser.config.window_height = 1000
@@ -12,5 +10,3 @@ def browser_setup():
 
     yield browser
     browser.quit()
-
-

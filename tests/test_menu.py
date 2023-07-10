@@ -1,23 +1,33 @@
 from model.pages.main_page import MainPage
-from model.pages.news_page import NewsPage
 
 
-news_page = NewsPage()
 main_page = MainPage()
 
 
-def test_menu_simple_desctop():  # для параметризации
+def test_menu_first_level(browser_setup):
     main_page.open()
 
     main_page.menu_desktop_click('Новости')
 
-    news_page.title('НОВОСТИ')
+    main_page.menu_result_title('НОВОСТИ')
 
 
-def test_menu_simple_mobile():  # для параметризации
+def test_menu_second_level(browser_setup):
     main_page.open()
 
-    main_page.mobile_burger_button_click()
-    main_page.menu_mobile_click('Новости')
+    main_page.menu_desktop_hover('О нас ')
+    main_page.menu_desktop_click('Клуб Приключений')
 
-    news_page.title('НОВОСТИ')
+    main_page.menu_result_title('ТУРКЛУБ АКТИВНОГО ТУРИЗМА')
+
+
+def test_menu_third_level(browser_setup):
+    main_page.open()
+
+    main_page.menu_desktop_hover('Типы')
+    main_page.menu_desktop_click('Сплав')
+
+    main_page.menu_result_title('СПЛАВ')
+
+
+

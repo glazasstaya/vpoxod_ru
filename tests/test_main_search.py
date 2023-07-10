@@ -8,7 +8,7 @@ main_page = MainPage()
 route_page = RoutPage()
 
 
-def test_main_search_form_success():
+def test_main_search_form_success(browser_setup):
     search_data = MainSearchForm(first_date_delta=1,
                                  second_date_delta=100,
                                  regions=['Кавказ', 'Алтай'],
