@@ -1,4 +1,5 @@
 import os.path
+import time
 
 import allure
 import requests
@@ -15,6 +16,7 @@ class MainPage:
     @allure.step('Ввести в поле поиска {text}')
     def header_search(self, text):
         browser.element('#header-sitesearch-q').click().type(text).press_enter()
+        time.sleep(2)
 
     @allure.step('Кликнуть на пункт меню {text}')
     def menu_click(self, text):

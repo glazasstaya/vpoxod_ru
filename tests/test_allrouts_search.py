@@ -25,7 +25,7 @@ def test_price_search_success(browser_setup, result_clear, price1, price2):
 
     allroutes_page.min_cost_fill(min_price)
     allroutes_page.max_cost_fill(max_price)
-    time.sleep(3)
+    time.sleep(4)
 
     allroutes_page.search_result_success('Найден')
     with allure.step('Проверить вождение цены в заданный диапазон'):
