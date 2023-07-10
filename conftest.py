@@ -1,5 +1,7 @@
 import pytest
+import os
 from selene.support.shared import browser
+from model.utils.helper import dir_checout
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -10,3 +12,5 @@ def browser_setup():
 
     yield browser
     browser.quit()
+
+
