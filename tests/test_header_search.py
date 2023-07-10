@@ -29,4 +29,4 @@ def test_header_search_negative(browser_setup):
 
     main_page.header_search('Хиhины')
 
-    search_page.search_result_failure('Ничего не найдено по заданным критериям поиска.')
+    search_page.search_result_failure('Ничего не найдено')

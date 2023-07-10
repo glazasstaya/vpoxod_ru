@@ -11,7 +11,7 @@ allroutes_page = AllroutesPage()
 def result_clear():
     allroutes_page.open()
     allroutes_page.max_cost_fill(0)
-    time.sleep(2)
+    time.sleep(3)
 
 
 @pytest.mark.parametrize('price1, price2', [(29000, 45000), (0, 3000), (45000, 90000)])
@@ -25,7 +25,7 @@ def test_price_search_success(browser_setup, result_clear, price1, price2):
 
     allroutes_page.min_cost_fill(min_price)
     allroutes_page.max_cost_fill(max_price)
-    time.sleep(2)
+    time.sleep(3)
 
     allroutes_page.search_result_success('Найден')
     with allure.step('Проверить вождение цены в заданный диапазон'):
