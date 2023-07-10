@@ -1,5 +1,8 @@
+import allure
 import pytest
 import os
+
+from allure_commons.types import Severity
 
 from model.utils.helper import dir_checout
 from model.pages.main_page import MainPage
@@ -15,6 +18,10 @@ def file_remove():
     os.remove('logo-20-years-orange.svg')
 
 
+@allure.feature('Логотип')
+@allure.story('Проверка размера логотипа')
+@allure.severity(Severity.BLOCKER)
+@allure.label("owner", "Sgibneva-tl")
 def test_downloaded_file_size(file_remove):
     main_page.logo_download()
 

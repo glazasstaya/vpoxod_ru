@@ -1,3 +1,6 @@
+import allure
+from allure_commons.types import Severity
+
 from model.pages.main_page import MainPage
 from model.data.data_objects import MainSearchForm
 from model.pages.route_page import RoutPage
@@ -8,6 +11,10 @@ main_page = MainPage()
 route_page = RoutPage()
 
 
+@allure.feature('Форма поиска на главной')
+@allure.story('Успешный')
+@allure.severity(Severity.CRITICAL)
+@allure.label("owner", "Sgibneva-tl")
 def test_main_search_form_success(browser_setup):
     search_data = MainSearchForm(first_date_delta=1,
                                  second_date_delta=100,
