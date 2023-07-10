@@ -1,4 +1,5 @@
 import time
+import allure
 import pytest
 
 from model.pages.allroutes_page import AllroutesPage
@@ -19,7 +20,9 @@ def test_price_search_success(browser_setup, result_clear, price1, price2):
 
     allroutes_page.min_cost_fill(min_price)
     allroutes_page.max_cost_fill(max_price)
+    time.sleep(2)
 
     allroutes_page.search_result_success('Найден')
-    assert allroutes_page.price() >= min_price
-    assert allroutes_page.price() <= max_price
+    with allure.step('Проверить вождение цены в заданный диапазон'):
+        assert allroutes_page.price() >= min_price
+        assert allroutes_page.price() <= max_price
