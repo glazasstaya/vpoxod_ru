@@ -52,6 +52,8 @@ pytest .
   <code><img width="5%" title="Jenkins" src="media/logo/allure_report.png"></code>
 </p>
 
+### [Allure-report](https://jenkins.autotests.cloud/job/005_tsgibneva_vpoxodru_ui_tests/16/allure/)
+
 ##### Сводная инфомация по прогону тестов
 <p  align="left">
   <code><img width="50%" title="Сводная информация в allure-report" src="media/screenshot/Allure_report1.png"></code>
