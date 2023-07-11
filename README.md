@@ -1,8 +1,9 @@
-## UI автотесты для сейчас  vpoxod_ru
+# UI-автотесты для сейчас  vpoxod_ru
 Учебный проект: UI-тесты для сайта vpoxod.ru
 
 <!-- Технологии -->
-<p  align="center">
+## Использованы технологии:
+<p  align="left">
   <code><img width="5%" title="Python" src="media/logo/python.png"></code>
   <code><img width="5%" title="Pycharm" src="media/logo/pycharm.png"></code>
   <code><img width="5%" title="Pytest" src="media/logo/pytest.png"></code>
@@ -19,11 +20,25 @@
 
 <!-- Тест кейсы -->
 
-### Что проверяем
+## Автоматизировано тестирование функционала:
 * Поле поиска в хедере (позитивный и негативный сценарий)
 * Форма поиска на главной - быстрый подбор путешествия по параметрам
 * Подбор путешествия по параметрам (по цене)
 * Проверка главного меню сайта
 * Проверка файла логотипа
 
+## Запуск тестов в Jenkins
+<p  align="left">
+  <code><img width="5%" title="Jenkins" src="media/logo/jenkins.png"></code>
+</p>
+
+### [Jenkins](https://jenkins.autotests.cloud/job/005_tsgibneva_vpoxodru_ui_tests/)
+
+#### Запуск тестов:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pytest .
+```
   
