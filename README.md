@@ -44,7 +44,7 @@ pytest .
   
 ##### При нажатии на "Собрать сейчас" тесты собираются из GitHub и начинается прохождение тестов в Selenide.
 <p  align="left">
-  <code><img width="50%" title="Jenkins" src="media/screenshot/Jenkins.png"></code>
+  <code><img width="45%" title="Jenkins" src="media/screenshot/Jenkins.png"></code>
 </p>
 
 ## В результате генерируется allure-отчет
@@ -56,19 +56,19 @@ pytest .
 
 ##### Сводная инфомация по прогону тестов
 <p  align="left">
-  <code><img width="50%" title="Сводная информация в allure-report" src="media/screenshot/Allure_report1.png"></code>
+  <code><img width="45%" title="Сводная информация в allure-report" src="media/screenshot/Allure_report1.png"></code>
 </p>
 
 ##### Инофграфика
 <p  align="left">
-  <code><img width="30%" title="Инфографика в allure-report" src="media/screenshot/Allure_report2.png"></code>
-  <code><img width="30%" title="Инфографика в allure-report" src="media/screenshot/Allure_report3.png"></code>
+  <code><img width="45%" title="Инфографика в allure-report" src="media/screenshot/Allure_report2.png"></code>
+  <code><img width="45%" title="Инфографика в allure-report" src="media/screenshot/Allure_report3.png"></code>
 </p>
 
 ##### Во вкладке Behavoirs тесты сгруппированы с точки зрения бизнес-логики, есть описание шагов, скриншот последнего шага теста, браузерные логи, видео прохождения кейса
 <p  align="left">
-  <code><img width="30%" title="Результаты тестов в allure-report" src="media/screenshot/Allure_report4.png"></code>
-  <code><img width="30%" title="Результаты тестов в allure-report" src="media/screenshot/Allure_report5.png"></code>
+  <code><img width="45%" title="Результаты тестов в allure-report" src="media/screenshot/Allure_report4.png"></code>
+  <code><img width="45%" title="Результаты тестов в allure-report" src="media/screenshot/Allure_report5.png"></code>
 </p>
 
 ## Тут надо написать про аллюр-тестопс и джиру
@@ -83,7 +83,7 @@ pytest .
 </p>
 
 <p  align="left">
-  <code><img width="50%" title="Telegram notification" src="media/screenshot/telegram-notification.png"></code>
+  <code><img width="30%" title="Telegram notification" src="media/screenshot/telegram-notification.png"></code>
 </p>
 
 
