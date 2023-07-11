@@ -28,6 +28,6 @@ def test_price_search_success(browser_setup, result_clear, price1, price2):
     time.sleep(6)
 
     allroutes_page.search_result_success('Найден')
-    with allure.step('Проверить вождение цены в заданный диапазон'):
+    with allure.step('Проверить вхождение цены в заданный диапазон'):
         assert allroutes_page.price() >= min_price
         assert allroutes_page.price() <= max_price
