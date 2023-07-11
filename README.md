@@ -54,12 +54,12 @@ pytest .
 
 ### [Allure-report](https://jenkins.autotests.cloud/job/005_tsgibneva_vpoxodru_ui_tests/16/allure/)
 
-##### Сводная инфомация по прогону тестов
+##### Сводная информация по прогону тестов
 <p  align="left">
   <code><img width="45%" title="Сводная информация в allure-report" src="media/screenshot/Allure_report1.png"></code>
 </p>
 
-##### Инофграфика
+##### Инфографика
 <p  align="left">
   <code><img width="45%" title="Инфографика в allure-report" src="media/screenshot/Allure_report2.png"></code>
   <code><img width="45%" title="Инфографика в allure-report" src="media/screenshot/Allure_report3.png"></code>
