@@ -20,7 +20,13 @@ class AllroutesPage:
     def search_result_success(self, text):
         browser.element('.route_search_counters').should(have.text(text))
 
-    def price(self):
-        price = browser.all('.table_price_right')[0].get(query.text)
-        return int(''.join(c for c in price if c.isdigit()))
+    @allure.step('Проверить вхождение цены в заданный диапазон')
+    def price_check(self, min_price, max_price):
+        prices = browser.all('.table_price_right')
+        for price in prices:
+            price_string = price.get(query.text)
+            price_value = int(''.join(c for c in price_string if c.isdigit()))
+            print(price_value)
+            assert price_value >= min_price
+            assert price_value <= max_price
 

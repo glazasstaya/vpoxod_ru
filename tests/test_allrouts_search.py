@@ -2,6 +2,7 @@ import time
 import allure
 import pytest
 from allure_commons.types import Severity
+from selene import browser
 
 from model.pages.allroutes_page import AllroutesPage
 allroutes_page = AllroutesPage()
@@ -28,6 +29,4 @@ def test_price_search_success(browser_setup, result_clear, price1, price2):
     time.sleep(6)
 
     allroutes_page.search_result_success('Найден')
-    with allure.step('Проверить вхождение цены в заданный диапазон'):
-        assert allroutes_page.price() >= min_price
-        assert allroutes_page.price() <= max_price
+    allroutes_page.price_check(min_price, max_price)
