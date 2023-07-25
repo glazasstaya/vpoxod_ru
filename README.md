@@ -71,11 +71,24 @@ pytest .
   <code><img width="45%" title="Результаты тестов в allure-report" src="media/screenshot/Allure_report5.png"></code>
 </p>
 
-## Тут надо написать про аллюр-тестопс и джиру
+## Настроена интеграция с Allure TestOps 
 <p  align="left">
   <code><img width="5%" title="Allure TestOps" src="media/logo/allure_testops.png"></code>
   <code><img width="5%" title="Jira" src="media/logo/jira.png"></code>
 </p>
+
+### [Allure TestOps](https://allure.autotests.cloud/project/3563/dashboards)
+<p  align="left">
+  <code><img width="45%" title="Дашборд в Allure Testops" src="media/screenshot/AllureTestOps1.png"></code>
+  <code><img width="45%" title="Тест-кейсы в Allure Testops" src="media/screenshot/AllureTestOps2.png"></code>
+</p>
+
+### [Тикет в Jira](https://jira.autotests.cloud/browse/HOMEWORK-814)
+<p  align="left">
+  <code><img width="45%" title="Тикет в Jira" src="media/screenshot/jira.png"></code>
+</p>
+
+
 
 ## По результату прогона отправляется уведомление в телеграм
 <p  align="left">
