@@ -31,5 +31,5 @@ def test_main_search_form_success(browser_setup):
     main_page.search_form_difficult_fill(search_data.difficult)
     main_page.search_form_submit()
 
-    scroll_to_element('#text1')
+    scroll_to_element('.article_content_text')
     route_page.search_result_check()
